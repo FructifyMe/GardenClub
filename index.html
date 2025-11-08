@@ -385,8 +385,8 @@
 
     <!-- App Logic -->
     <script type="module">
-        // --- !!! PASTE YOUR GOOGLE APPS SCRIPT URL HERE !!! ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwONJemDYKCL37LJKhepZhJ5DMKJAawJ7zoRL1VqUT50SRbrV6FDjIZ0I3_aN8QGw/exec';
+        // --- !!! THIS IS YOUR NEW, CORRECT URL !!! ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzwB_5Jyz_hCjyvBWLrOz4fIenKP03dRMHBx-aDQ_IE3ExNz1hZFi7eYtZU3rFkN8ES/exec';
         
         const committees = [
             { id: 'conservation', name: 'Conservation & Arbor Day' },
@@ -514,9 +514,17 @@
                 const res = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'cors', // Required for cross-domain requests
+                    
+                    // --- THE FIX ---
+                    // This was 'application/json', which requires a complex CORS "preflight"
+                    // request that Google's servers are buggy and blocking.
+                    // 'text/plain' is a "simple request" and does NOT require a preflight.
+                    // This bypasses the Google-side bug.
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain',
                     },
+                    // We still send the JSON, but we've *labeled* it as plain text
+                    // to bypass the CORS preflight. The script will still parse it as JSON.
                     body: JSON.stringify(applicationData),
                 });
 
