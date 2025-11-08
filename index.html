@@ -385,7 +385,7 @@
 
     <!-- App Logic -->
     <script type="module">
-        // --- !!! THIS IS YOUR NEW, CORRECT URL !!! ---
+        // --- !!! THIS IS YOUR NEW, CORRECT URL FROM YOUR LOGS !!! ---
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdLFhLuCCcz-bHPNohNLNkyqr0x7W36OUkJFzO0VutJHi78Y9VONHvw6m_V4-6TTWs/exec';
         
         const committees = [
@@ -515,7 +515,7 @@
                     method: 'POST',
                     mode: 'cors', // Required for cross-domain requests
                     
-                    // --- THE FIX ---
+                    // --- THIS IS THE FIX ---
                     // This was 'application/json', which requires a complex CORS "preflight"
                     // request that Google's servers are buggy and blocking.
                     // 'text/plain' is a "simple request" and does NOT require a preflight.
