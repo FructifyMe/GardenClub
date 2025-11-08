@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danvers Garden Club - New Member Dues</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for form elements to look clean */
+        .form-input {
+            @apply w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+        }
+        .form-checkbox {
+            @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500;
+        }
+        .form-radio {
+            @apply text-indigo-600 border-gray-300 focus:ring-indigo-500;
+        }
+        .form-label {
+            @apply block text-sm font-medium text-gray-700;
+        }
+        /* Hide/show for modals */
+        .modal {
+            display: none;
+        }
+        .modal-overlay {
+            @apply fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity;
+        }
+        .modal-content {
+            @apply fixed inset-0 z-10 w-screen overflow-y-auto;
+        }
+        .modal-box {
+            @apply flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0;
+        }
+        .modal-panel {
+            @apply relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-lg border border-gray-200">
+        
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-6">
+            <div>
+                <!-- SVG Logo Removed -->
+                <h1 class="text-3xl font-bold text-gray-900">Danvers Garden Club</h1>
+                <p class="text-lg text-gray-600">New Member Dues Bill</p>
+                <a href="mailto:danversgardenclub@gmail.com" class="text-green-700 hover:text-green-800">danversgardenclub@gmail.com</a>
+            </div>
+            
+            <!-- MODIFIED: Changed this box to match the "Send Form & Check to" from the PDF -->
+            <div class="w-full sm:w-auto mt-4 sm:mt-0">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-left">
+                    <p class="text-sm font-semibold text-gray-700">Send Form & Check to:</p>
+                    <p class="text-sm text-gray-600 font-bold">Linda Jean, Membership Chair</p>
+                    <p class="text-sm text-gray-600">20 West St.</p>
+                    <p class="text-sm text-gray-600">Danvers, MA 01923</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Start -->
+        <form id="member-form" class="mt-8 space-y-8">
+            
+            <!-- Membership Level -->
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900">Check One:</h2>
+                <fieldset class="mt-2">
+                    <legend class="sr-only">Membership Level</legend>
+                    <div class="space-y-2 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                        <div class="flex items-center">
+                            <input id="level-active" name="membership-level" type="radio" value="active" required class="form-radio">
+                            <label for="level-active" class="ml-3 block text-sm font-medium text-gray-700">Active $55</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="level-senior" name="membership-level" type="radio" value="senior" required class="form-radio">
+                            <label for="level-senior" class="ml-3 block text-sm font-medium text-gray-700">Sr Active $45* <span class="text-gray-500 font-normal">*62 or older by 6/1/25</span></label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Welcome Text -->
+            <div class="prose prose-sm max-w-none text-gray-700">
+                <p>Welcome to the Danvers Garden Club! Upon receipt of your dues payment, you will become a member of the Club and will be contacted with information on our meeting schedule and new members activities. Dues renewal bills for each year will be sent out in April.</p>
+                <!-- MODIFIED: Added this line -->
+                <p class="font-semibold">Please complete this form to submit your membership information. You can submit online (and pay online) or print this page and mail it with your check payable to "Danvers Garden Club".</p>
+            </div>
+
+            <!-- Yearbook Information -->
+            <fieldset>
+                <legend class="text-xl font-semibold text-gray-900">Yearbook Information</legend>
+                <p class="text-sm text-gray-600 mt-1">The Danvers Garden Club Yearbook is printed annually in August and given to the members in September. Please enter your information as you wish it to be included in the next edition.</p>
+                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div class="sm:col-span-6">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" name="name" id="name" required class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <label for="address" class="form-label">Street Address:</label>
+                        <input type="text" name="address" id="address" required class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="city" class="form-label">City:</label>
+                        <input type="text" name="city" id="city" value="Danvers" required class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-1">
+                        <label for="state" class="form-label">State:</label>
+                        <input type="text" name="state" id="state" value="MA" required class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="zip" class="form-label">Zip:</label>
+                        <input type="text" name="zip" id="zip" inputmode="numeric" required class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="phone-home" class="form-label">Home Tel #:</label>
+                        <input type="tel" name="phone-home" id="phone-home" class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="phone-cell" class="form-label">Cell #:</label>
+                        <input type="tel" name="phone-cell" id="phone-cell" class="form-input">
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" id="email" required class="form-input">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Committees -->
+            <fieldset>
+                <legend class="text-xl font-semibold text-gray-900">Committees to Join</legend>
+                <p class="text-sm text-gray-600 mt-1">All Active/Senior Active new members are automatically assigned and required to participate on the <strong>Civic Development, Fundraising, and Hospitality*</strong> committees as these require many participants to accomplish and the best way for you to meet other members in smaller groups.</p>
+                <!-- MODIFIED: Changed this text to match the PDF and point to the button -->
+                <p class="text-sm text-gray-600 mt-2">Please refer to the committee descriptions (click the "Show/Hide" button below) and check off <strong>at least one more committee</strong> below that interests you to volunteer on. Otherwise, you are opting to be assigned where you are needed most and you will see it listed in the Yearbook.</p>
+                
+                <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    
+                    <template id="committee-template">
+                        <div class="relative flex items-start">
+                            <div class="flex h-6 items-center">
+                                <input type="checkbox" class="form-checkbox committee-checkbox">
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label class="font-medium text-gray-900"></label>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- MODIFIED: Changed grid-cols-3 to grid-cols-2 to match the PDF layout -->
+                    <div id="committee-list" class="col-span-full grid grid-cols-2 gap-4"></div>
+                </div>
+                
+                <!-- Committee Descriptions Toggle -->
+                <!-- MODIFIED: Changed button text -->
+                <button type="button" id="toggle-descriptions" class="mt-4 text-sm font-medium text-green-700 hover:text-green-800">
+                    Show/Hide Committee Descriptions
+                </button>
+                <div id="committee-descriptions" class="hidden mt-6 prose prose-sm max-w-none text-gray-700 space-y-4">
+                    <p><strong>*Civic Development</strong> - Our club plants and maintains the Centre Street Island, the Route 62 Town Line welcome garden, and the Remembrance Garden & Memorial Containers at the Kaplan Family Hospice House on Liberty Street. Beneficiaries are all who walk or drive by and enjoy their beauty and color. Members are needed and required to participate for 1 week during May-October to water, plant, deadhead, trim and care for these sites.</p>
+                    <p><strong>Conservation & Arbor Day</strong> - This is an ever-changing topic in our society, especially in our Town. Arbor Day is celebrated on the last Friday of April. The Town of Danvers is a "Tree City USA" member, and we join in celebrating Arbor Day with donating a tree for the planting by DPW on public property. Members of the club, along with the Forestry Department, coordinate in bagging 500 seedling trees to be distributed at the five elementary schools for students who have signed up for the educational program.</p>
+                    <p><strong>Design</strong> - Mini-demonstrations are given in conjunction with INTRA-CLUB competitions. The Committee also creates the centerpieces for the annual meeting in May. Chairs, Co-chairs and Committee members will need to arrive 30 minutes before the meeting starts to assist with arranging entries in the bi-monthly competition.</p>
+                    <p><strong>Downtown Decorating</strong> - This committee will beautify the square for the holiday season. In the late fall, members of this committee with help paint ornaments as well as learn how to make hand-made bows for the Holiday tree and wreaths that line Maple & High Streets. The committee will need to paint wooden ornaments that need refreshing, and assist in putting bows on wreaths early one morning in late November.</p>
+                    <p><strong>*Fundraising</strong> - The club hosts many creative and fun fundraising events throughout the year from Drawings, club items for sale, Greens Sales, Garden Tours, Plant Sales, Clothing Drives and more. This lets all members be involved, volunteer, and make new friends. The funds help meet the club's expenses towards programs, workshops, special projects, and operations. Some of these are open to the public and some are intra-club only. Everyone who joins to help ensure these events are successful and we all have a great time.</p>
+                    <p><strong>Garden Therapy</strong> - Garden Therapy's goal is to bring some joy to local nursing home residents and senior center participants. Our objective is to provide support and pleasant surprises. The plans of the committee are to have at least 4 projects per year, such as writing holiday cards, making mini arrangements for seniors, etc.</p>
+                    <p><strong>Horticulture</strong> - Mini-demonstrations are given in conjunction with INTRA-CLUB competitions. Chairs, Co-chairs and Participants will need to arrive 30 minutes before the meeting starts to assist with arranging entries in the bi-monthly competition.</p>
+                    <p><strong>*Hospitality</strong> - The committee members bake or buy treats for our monthly membership meetings to enjoy during the social time before the business meeting. You will find the month you are assigned to in the Club Yearbook.</p>
+                    <p><strong>Membership</strong> - Each meeting all members are greeted by this committee to check in, receive their name tags, and register any guests on guest nights. This is a great way to greet everyone and learn names. You will need to arrive about 30 minutes before the meeting starts to check in members. You also may assist with tracking attendance, renewals, status', etc.</p>
+                    <p><strong>Programs</strong> - The chair(s) select programs and workshops for our monthly membership meetings. The ideas come from suggestions provided by GCFM and our membership. GCFM provides a preview as well as an information page on their web site. In addition to those programs suggested by GCFM, our very talented club members may present programs/workshops. Committee members may be called on to help bring in workshop materials, set-up the workshops, clean-up after workshops or assist during programs and workshops.</p>
+                    <p><strong>Scholarship</strong> - The Club presents a $1,500 Sue Nickerson Memorial Scholarship to a Danvers high school senior each year. We post school flyers/notices with criteria to attract applicants, and then the committee reviews and discusses the information provided by candidates and chooses the Scholarship recipient.</p>
+                    <p class="font-semibold">*All Active and Senior Active new members are automatically assigned to the Fundraising Committee the first year and are required to participate on the Civic Development and Hospitality Committees every year.</p>
+                </div>
+            </fieldset>
+
+            <!-- Junior Gardener -->
+            <fieldset>
+                <legend class="text-xl font-semibold text-gray-900">Sign up a Junior Gardener</legend>
+                <p class="text-sm text-gray-600 mt-1">The Junior Gardeners Club always invites members to sign up any related child in your family ages 6-18. You will be expected to assist at the monthly afternoon meetings and occasionally provide snacks. If you would like to sign up a child to be a Junior member please fill out this information and include their $25 Dues per child:</p>
+                
+                <div class="relative flex items-start mt-4">
+                    <div class="flex h-6 items-center">
+                        <input id="signup-junior" name="signup-junior" type="checkbox" class="form-checkbox">
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label for="signup-junior" class="font-medium text-gray-900">Yes, I would like to sign up a Junior Gardener.</label>
+                    </div>
+                </div>
+
+                <!-- MODIFIED: Changed grid layout to match the PDF's 2x3 field layout -->
+                <div id="junior-fields" class="hidden mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6 border-t pt-6">
+                    <div class="sm:col-span-2">
+                        <label for="junior-name" class="form-label">Child's Name:</label>
+                        <input type="text" name="junior-name" id="junior-name" class="form-input">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="junior-address" class="form-label">Child's Address:</label>
+                        <input type="text" name="junior-address" id="junior-address" class="form-input">
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="junior-age" class="form-label">Age on 6/1/25:</label>
+                        <input type="number" name="junior-age" id="junior-age" class="form-input">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="junior-relationship" class="form-label">Your Relationship:</label>
+                        <input type="text" name="junior-relationship" id="junior-relationship" class="form-input">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="junior-parent-name" class="form-label">Parent's Name (if different):</label>
+                        <input type="text" name="junior-parent-name" id="junior-parent-name" class="form-input">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="junior-parent-cell" class="form-label">Parent's Cell # (if different):</label>
+                        <input type="tel" name="junior-parent-cell" id="junior-parent-cell" class="form-input">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Media Disclosure -->
+            <fieldset>
+                <legend class="text-xl font-semibold text-gray-900">DGC Media Disclosure Consent</legend>
+                <p class="text-sm text-gray-600 mt-1">I give the Danvers Garden Club permission to use photos, videos or images, of me, on the website, the local newspaper, or in any other marketing material.</p>
+                <div class="mt-4 space-y-2 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    <div class="flex items-center">
+                        <input id="consent-yes" name="media-consent" type="radio" value="yes" required class="form-radio">
+                        <label for="consent-yes" class="ml-3 block text-sm font-medium text-gray-700">Yes</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="consent-no" name="media-consent" type="radio" value="no" required class="form-radio">
+                        <label for="consent-no" class="ml-3 block text-sm font-medium text-gray-700">No</label>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">If a member chooses not to grant permission for her image or likeness to be used, she acknowledges and understands that it is her responsibility to remove herself from photographs and/or to notify the DGC before any images are posted.</p>
+            </fieldset>
+
+            <!-- Signature -->
+            <fieldset>
+                 <legend class="text-xl font-semibold text-gray-900">Member Signature</legend>
+                 <label for="signature" class="form-label mt-1 text-sm">Please type your full name below. This will act as your digital signature.</label>
+                <input type="text" name="signature" id="signature" required class="form-input mt-2">
+            </fieldset>
+
+            <!-- Legal Footer -->
+            <div class="text-center border-t pt-6">
+                <p class="text-xs text-gray-500">The Danvers Garden Club is a 501(c)3 Non-Profit under</p>
+                <p class="text-xs text-gray-500">The Garden Club Federation of Massachusetts, Inc. (GCFM), Northern District</p>
+                <p class="text-xs text-gray-500">and is a Member of the National Garden Clubs, Inc., N.E. Regional District</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-5">
+                <div class="flex justify-end">
+                    <button type="submit" id="submit-button" class="inline-flex justify-center rounded-md bg-green-700 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 disabled:opacity-50">
+                        <span id="submit-text">Submit Application</span>
+                        <span id="submit-spinner" class="hidden items-center">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Submitting...
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-success">
+        <div class="modal-content">
+            <div class="modal-box">
+                <div class="modal-panel">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-lg font-semibold leading-6 text-gray-900" id="modal-title-success">Application Submitted!</h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-600">Thank you! Your information has been submitted.</p>
+                                <p class="text-base font-semibold text-gray-800 mt-4">Your final step is to pay your dues.</p>
+                                <p class="text-sm text-gray-600 mt-1">Please click the link below that matches your membership level. This will take you to a secure page to pay by credit or debit card.</p>
+                                
+                                <!-- REPLACE THESE # HREFS WITH YOUR REAL PAYPAL/SQUARE/STRIPE LINKS -->
+                                <div class="mt-4 space-y-2">
+                                    <a href="#" target="_blank" class="block w-full text-center rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
+                                        Pay for Active Membership ($55)
+                                    </a>
+                                    <a href="#" target="_blank" class="block w-full text-center rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700">
+                                        Pay for Senior Membership ($45)
+                                    </a>
+                                    <p class="text-sm text-gray-600 text-center pt-2">...or if you're adding a Junior Gardener:</p>
+                                    <a href="#" target="_blank" class="block w-full text-center rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600">
+                                        Pay for Active + 1 Junior ($80)
+                                    </a>
+                                    <a href="#" target="_blank" class="block w-full text-center rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600">
+                                        Pay for Senior + 1 Junior ($70)
+                                    </a>
+                                </div>
+
+                                <p class="text-xs text-gray-500 mt-4">If you prefer to pay by check, please mail it to: Linda Jean, 20 West St., Danvers, MA 01923.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                        <button type="button" class="close-modal-button inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODIFICATION: Added the missing Error Modal -->
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-error">
+        <div class="modal-content">
+            <div class="modal-box">
+                <div class="modal-panel">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 9.75a9 9 0 110-18 9 9 0 010 18z" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title-error">Submission Failed</h3>
+                            <div class="mt-2">
+                                <p id="error-message" class="text-sm text-gray-500">There was a problem submitting your application. Please try again. If the problem persists, please contact the club administrator.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                        <button type="button" class="close-modal-button inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Validation Modal -->
+    <div id="validation-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-validation">
+        <div class="modal-content">
+            <div class="modal-box">
+                <div class="modal-panel">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title-validation">Missing Information</h3>
+                            <div class="mt-2">
+                                <p id="validation-message" class="text-sm text-gray-500">Please select at least one committee to join.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                        <button type="button" class="close-modal-button inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- App Logic -->
+    <script type="module">
+        // --- !!! PASTE YOUR GOOGLE APPS SCRIPT URL HERE !!! ---
+        const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+        
+        const committees = [
+            { id: 'conservation', name: 'Conservation & Arbor Day' },
+            { id: 'design', name: 'Design' },
+            { id: 'downtown', name: 'Downtown Decorating' },
+            { id: 'therapy', name: 'Garden Therapy' },
+            { id: 'horticulture', name: 'Horticulture' },
+            { id: 'membership', name: 'Membership' },
+            { id: 'programs', name: 'Programs' },
+            { id: 'scholarship', name: 'Scholarship' },
+        ];
+
+        // --- Populate Committees ---
+        const committeeTemplate = document.getElementById('committee-template');
+        const committeeList = document.getElementById('committee-list');
+        committees.forEach(committee => {
+            const clone = committeeTemplate.content.cloneNode(true);
+            const input = clone.querySelector('input');
+            const label = clone.querySelector('label');
+            
+            input.id = `committee-${committee.id}`;
+            input.value = committee.name;
+            label.htmlFor = `committee-${committee.id}`;
+            label.textContent = committee.name;
+            
+            committeeList.appendChild(clone);
+        });
+
+        // Toggle for Committee Descriptions
+        const toggleButton = document.getElementById('toggle-descriptions');
+        const descriptions = document.getElementById('committee-descriptions');
+        toggleButton.addEventListener('click', () => {
+            const isHidden = descriptions.style.display === 'none' || descriptions.style.display === '';
+            if (isHidden) {
+                descriptions.style.display = 'block';
+                toggleButton.textContent = 'Hide Committee Descriptions';
+            } else {
+                descriptions.style.display = 'none';
+                toggleButton.textContent = 'Show Committee Descriptions';
+            }
+        });
+
+        // Toggle for Junior Gardener fields
+        const juniorSignup = document.getElementById('signup-junior');
+        const juniorFields = document.getElementById('junior-fields');
+        juniorSignup.addEventListener('change', () => {
+            if (juniorSignup.checked) {
+                juniorFields.style.display = 'grid';
+            } else {
+                juniorFields.style.display = 'none';
+            }
+        });
+
+        // --- Modal Logic ---
+        const successModal = document.getElementById('success-modal');
+        const errorModal = document.getElementById('error-modal'); // MODIFICATION: This will now find the modal
+        const validationModal = document.getElementById('validation-modal');
+        const closeButtons = document.querySelectorAll('.close-modal-button');
+        
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                successModal.style.display = 'none';
+                errorModal.style.display = 'none';
+                validationModal.style.display = 'none';
+            });
+        });
+
+        // --- Form Submission ---
+        const form = document.getElementById('member-form');
+        const submitButton = document.getElementById('submit-button');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Check for committee selection
+            const checkedCommittees = Array.from(document.querySelectorAll('.committee-checkbox:checked'));
+            if (checkedCommittees.length === 0) {
+                document.getElementById('validation-message').textContent = "Please select at least one committee to join.";
+                validationModal.style.display = 'block';
+                return;
+            }
+
+            // MODIFICATION: Removed duplicate check and the alert()
+            if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+                console.error("SCRIPT_URL is not set.");
+                document.getElementById('validation-message').textContent = "Form submission is not configured. Please contact the club administrator.";
+                validationModal.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitText.style.display = 'none';
+            submitSpinner.style.display = 'inline-flex';
+
+            try {
+                // 1. Collect all form data
+                const formData = new FormData(form);
+                
+                const applicationData = {
+                    name: formData.get('name'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    zip: formData.get('zip'),
+                    phoneHome: formData.get('phone-home'),
+                    phoneCell: formData.get('phone-cell'),
+                    email: formData.get('email'),
+                    membershipLevel: formData.get('membership-level'),
+                    committees: checkedCommittees.map(cb => cb.value).join(', '), // Send as comma-separated string
+                    mediaConsent: formData.get('media-consent'),
+                    signature: formData.get('signature'),
+                    signupJunior: formData.get('signup-junior') === 'on',
+                    juniorName: formData.get('junior-name') || '',
+                    juniorAge: formData.get('junior-age') || '',
+                    juniorAddress: formData.get('junior-address') || '',
+                    juniorRelationship: formData.get('junior-relationship') || '',
+                    juniorParentName: formData.get('junior-parent-name') || '',
+                    juniorParentCell: formData.get('junior-parent-cell') || '',
+                };
+
+                // 2. Send to Google Apps Script
+                const res = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors', // Required for cross-domain requests
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(applicationData),
+                });
+
+                // Check if the response is OK (status 200-299)
+                if (!res.ok) {
+                    // Try to get error text, but fallback if it's not JSON
+                    let errorMsg = `Server error: ${res.status}`;
+                    try {
+                        const errorResult = await res.json();
+                        errorMsg = errorResult.message || JSON.stringify(errorResult);
+                    } catch (e) {
+                        // Response wasn't JSON, just use status text
+                        errorMsg = res.statusText;
+                    }
+                    throw new Error(errorMsg);
+                }
+
+                const result = await res.json();
+
+                if (result.status === 'success') {
+                    // 3. Show success modal
+                    successModal.style.display = 'block';
+                    form.reset(); // Clear the form
+                    // Hide descriptions and junior fields again
+                    descriptions.style.display = 'none';
+                    toggleButton.textContent = 'Show Committee Descriptions';
+                    juniorFields.style.display = 'none';
+                } else {
+                    throw new Error(result.message || 'Unknown error from script');
+                }
+            
+            // MODIFICATION: Added the missing catch and finally blocks
+            } catch (error) {
+                console.error('Submission Error:', error);
+                // 4. Show error modal
+                document.getElementById('error-message').textContent = `There was a problem submitting your application: ${error.message}. Please try again.`;
+                errorModal.style.display = 'block';
+            } finally {
+                // 5. Reset button
+                submitButton.disabled = false;
+                submitText.style.display = 'inline-flex';
+                submitSpinner.style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
